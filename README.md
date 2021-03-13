@@ -1,6 +1,6 @@
 # AWS CDK Fargate Docker example project
 
-
+An example of deploying a docker image to Fargate + Cloudfront, by using AWS CDK
 
 ## Features
 
@@ -16,7 +16,7 @@
 Install AWS CDK
 
 ```bash
-brew install node awscli
+brew install awscli
 npm install -g aws-cdk
 ```
 
@@ -53,4 +53,4 @@ Configure your region, AWS account id and certificate details in /lib/common/con
 
 ## Removing setup
 * Destroy all stacks
-* You will have ACM Certificates, hosted zone (with an NS record, $0.50 per month), AWS Secrets Manager secret ($0.40 per month) left in your AWS infra
+* You will have hosted zone ($0.50 per month), AWS Secrets Manager secret ($0.40 per month per secret) and ACM certificates left in your AWS infra
