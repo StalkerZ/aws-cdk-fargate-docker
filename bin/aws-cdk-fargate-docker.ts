@@ -11,6 +11,7 @@ import { toSnakeCase } from '../lib/common/stringUtil'
 const app = new App()
 
 const { vpc } = new VPCStack(app, `${appId}VpcStack`, { env, appId })
+
 const { hostedZone, cloudfrontCertificate, appCertificate } = new Route53Stack(
   app,
   `${appId}Route53Stack`,

@@ -46,7 +46,7 @@ function getConfig(appEnv: AppEnv): AppConfig {
         env: appEnv,
         imageTag: 'latest',
         containerPort: 3000,
-        appSecretArn: `arn:aws:secretsmanager:${AWS_REGION}:${AWS_ACCOUNT_ID}:secret:MyAppSecret-<secret-id>`,
+        appSecretArn: `arn:aws:secretsmanager:${AWS_REGION}:${AWS_ACCOUNT_ID}:secret:${appId}Secret-<secret-id>`,
         dns: {
           cloudfrontCertificate: {
             certificateArn: `arn:aws:acm:us-east-1:${AWS_ACCOUNT_ID}:certificate/<certificate-uuid>`,

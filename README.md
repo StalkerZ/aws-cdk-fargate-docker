@@ -1,5 +1,7 @@
 # AWS CDK Fargate Docker example project
 
+
+
 ## Features
 
 - Fargate cluster with Application Load Balancer and 2 availability zones
@@ -22,9 +24,9 @@ Setup Domain and certificates
 
 1. Register a domain with AWS
 2. Create AWS ACM certificate in us-east-1. It is going to be used with CloudFront and must be in us-east-1 region.
-3. Create AWS ACM certificate in your region. It is going to be use with Application Load Balancer
+3. Create AWS ACM certificate in your region. It is going to be used with Application Load Balancer.
 
-Create ECR stack and manually deploy example docker image there:
+Create ECR stack and deploy create-react-app docker image:
 
 ```base
 cd my-app
@@ -34,7 +36,7 @@ docker tag <tag> <aws-account-id>.dkr.ecr.<region>.amazonaws.com/<appIdLowercase
 docker push <aws-account-id>.dkr.ecr.<region>.amazonaws.com/<appIdLowercase>-repository:latest
 ```
 
-Create secret in AWS Secrets Manager
+Create secret in AWS Secrets Manager:
 
 1. Open AWS Secrets Manager console > Store a new secret > Other type of secrets
 2. Add key/value, key must be "secretKey", value can be any string.

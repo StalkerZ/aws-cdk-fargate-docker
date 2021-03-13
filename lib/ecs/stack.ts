@@ -15,7 +15,6 @@ import {
   CfnListener,
   IApplicationLoadBalancer,
 } from '@aws-cdk/aws-elasticloadbalancingv2'
-import { ManagedPolicy, Role, ServicePrincipal } from '@aws-cdk/aws-iam'
 import { ARecord, IHostedZone, RecordTarget } from '@aws-cdk/aws-route53'
 import { LoadBalancerTarget } from '@aws-cdk/aws-route53-targets'
 import { Secret } from '@aws-cdk/aws-secretsmanager'
@@ -47,30 +46,16 @@ export class ECSStack extends Stack {
 
     const cluster = new Cluster(this, `${appId}Cluster`, { vpc })
 
-    // https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
-    /*const taskRole = new Role(this, `${appId}EcsTaskRole`, {
-      roleName: `${appId}ECSTaskRole`,
-      assumedBy: new ServicePrincipal('ecs-tasks.amazonaws.com'),
-      managedPolicies: [
-        ManagedPolicy.fromAwsManagedPolicyName(
-          'service-role/AmazonECSTaskExecutionRolePolicy'
-        ),
-      ],
-    })*/
-
     const appSecret = Secret.fromSecretCompleteArn(
       this,
       `${appId}Secret`,
       appSecretArn
     )
 
-    // appSecret.grantRead(taskRole)
-
     const taskDefinition = new FargateTaskDefinition(
       this,
       `${appId}TaskDefinition`,
       {
-        //taskRole,
         memoryLimitMiB: 1024, // default 512, has to be raised for create-react-app container
       }
     )
