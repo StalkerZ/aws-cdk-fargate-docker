@@ -1,6 +1,7 @@
 {
   "name": "aws-cdk-fargate-docker",
   "author": "Daria Oksman",
+  "license": "MIT",
   "version": "0.1.0",
   "bin": {
     "aws-cdk-fargate-docker": "bin/aws-cdk-fargate-docker.ts"
