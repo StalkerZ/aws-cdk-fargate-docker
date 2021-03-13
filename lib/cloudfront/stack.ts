@@ -43,6 +43,7 @@ export class CloudFrontStack extends Stack {
         viewerProtocolPolicy: ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
       },
       domainNames: [
+        domainName,
         `${Subdomain.www}.${domainName}`,
         `${Subdomain.elb}.${domainName}`,
       ],

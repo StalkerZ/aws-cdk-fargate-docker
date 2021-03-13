@@ -14,41 +14,25 @@ export class Route53Stack extends Stack {
 
     const { appId } = props
 
-    const { domainName, cloudfrontCertificate, appCertificate } = config.dns
+    const {
+      domainName,
+      cloudfrontCertificateArn,
+      appCertificateArn,
+    } = config.dns
 
     this.hostedZone = HostedZone.fromLookup(this, `${appId}HostedZone`, {
       domainName,
     })
 
-    const cloudfrontValidateCnameRecord = new CnameRecord(
-      this,
-      `${appId}ValidateCertificate`,
-      {
-        zone: this.hostedZone,
-        domainName: cloudfrontCertificate.recordValue,
-        recordName: cloudfrontCertificate.recordName,
-      }
-    )
-
-    const appValidateCnameRecord = new CnameRecord(
-      this,
-      `${appId}ValidateCertificateAppCertificate`,
-      {
-        zone: this.hostedZone,
-        domainName: appCertificate.recordValue,
-        recordName: appCertificate.recordName,
-      }
-    )
-
     this.cloudfrontCertificate = Certificate.fromCertificateArn(
       this,
       `${appId}Certificate`,
-      cloudfrontCertificate.certificateArn
+      cloudfrontCertificateArn
     )
     this.appCertificate = Certificate.fromCertificateArn(
       this,
       `${appId}AppCertificate`,
-      appCertificate.certificateArn
+      appCertificateArn
     )
   }
 }

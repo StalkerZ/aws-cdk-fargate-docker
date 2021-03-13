@@ -1,13 +1,7 @@
-interface DnsCertificateConfig {
-  certificateArn: string
-  recordName: string
-  recordValue: string
-}
-
 interface DnsConfig {
   domainName: string
-  cloudfrontCertificate: DnsCertificateConfig
-  appCertificate: DnsCertificateConfig
+  cloudfrontCertificateArn: string
+  appCertificateArn: string
 }
 
 interface VpcConfig {
@@ -48,17 +42,9 @@ function getConfig(appEnv: AppEnv): AppConfig {
         containerPort: 3000,
         appSecretArn: `arn:aws:secretsmanager:${AWS_REGION}:${AWS_ACCOUNT_ID}:secret:${appId}Secret-<secret-id>`,
         dns: {
-          cloudfrontCertificate: {
-            certificateArn: `arn:aws:acm:us-east-1:${AWS_ACCOUNT_ID}:certificate/<certificate-uuid>`,
-            recordName: '_<record-name>.<domain-name>.', // record name and value are visible in AWS ACM Console
-            recordValue: '_<record-valuee>.<id>.acm-validations.aws.',
-          },
           domainName: '<domain-name>', // my-app-example.xyz
-          appCertificate: {
-            certificateArn: `arn:aws:acm:${AWS_REGION}:${AWS_ACCOUNT_ID}:certificate/<certificate-uuid>`,
-            recordName: '_<record-name>.<domain-name>.',
-            recordValue: '_<record-valuee>.<id>.acm-validations.aws.',
-          },
+          cloudfrontCertificateArn: `arn:aws:acm:us-east-1:${AWS_ACCOUNT_ID}:certificate/<certificate-uuid>`,
+          appCertificateArn: `arn:aws:acm:${AWS_REGION}:${AWS_ACCOUNT_ID}:certificate/<certificate-uuid>`,
         },
         vpc: {
           cidr: '10.0.0.0/16',
