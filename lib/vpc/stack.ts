@@ -28,7 +28,7 @@ export class VPCStack extends Stack {
       subnetConfiguration: [
         {
           name: `${appId}Public`,
-          cidrMask: 26, // 57 available addresses (62 - 5 reserved by AWS)
+          cidrMask: 26, // 59 available addresses (64 - 5 reserved by AWS)
           subnetType: SubnetType.PUBLIC,
         },
         {
